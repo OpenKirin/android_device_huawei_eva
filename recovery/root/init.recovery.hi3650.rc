@@ -1,0 +1,13 @@
+import /init.usb.configfs.rc
+
+on init
+    symlink /dev/block/platform/hi_mci.0 /dev/block/bootdevice
+
+on fs
+    start teecd
+
+service teecd /sbin/teecd
+    disabled
+    user root
+    group root
+    seclabel u:r:tee:s0
