@@ -15,9 +15,11 @@ service teecd /sbin/teecd
     user root
     group root
     disabled
+    seclabel u:r:tee:s0
 
 service volisnotd /sbin/volisnotd -m
     user root
     group root
     disabled
+    seclabel u:r:tee:s0
 
