@@ -1,13 +1,23 @@
-import /init.usb.configfs.rc
-
 on init
+    mkdir /cust
+
     symlink /dev/block/platform/hi_mci.0 /dev/block/bootdevice
 
 on fs
     start teecd
+    start volisnotd
+
+on boot
+    chown system system /sys/devices/ff200000.hisi_usb/plugusb
+    chmod 0660 /sys/devices/ff200000.hisi_usb/plugusb
 
 service teecd /sbin/teecd
-    disabled
     user root
     group root
-    seclabel u:r:tee:s0
+    disabled
+
+service volisnotd /sbin/volisnotd -m
+    user root
+    group root
+    disabled
+
