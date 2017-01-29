@@ -74,7 +74,7 @@ TW_INPUT_BLACKLIST := "accelerometer"
 
 TW_INCLUDE_CRYPTO := true
 TW_CRYPTO_FS_TYPE := "f2fs"
-TW_CRYPTO_REAL_BLKDEV := "/dev/block/platform/hi_mci.0/by-name/userdata"
+TW_CRYPTO_REAL_BLKDEV := "/dev/block/bootdevice/by-name/userdata"
 TW_CRYPTO_MNT_POINT := "/data"
 
 TW_EXCLUDE_SUPERSU := true
