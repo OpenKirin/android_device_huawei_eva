@@ -1,11 +1,11 @@
 /boot		emmc		/dev/block/bootdevice/by-name/boot
 /cache		ext4		/dev/block/bootdevice/by-name/cache
-/data		f2fs		/dev/block/dm-0
+/data		f2fs		/dev/block/bootdevice/by-name/userdata
 /system		ext4		/dev/block/bootdevice/by-name/system
 /recovery       emmc            /dev/block/bootdevice/by-name/recovery
 /misc		emmc		/dev/block/bootdevice/by-name/misc			flags=display="Misc";backup=0
 
-/cust           ext4            /dev/block/bootdevice/by-name/cust       		flags=display="Cust";storage;settingsstorage;backup=1
+/cust           ext4            /dev/block/bootdevice/by-name/cust       		flags=display="Cust";backup=1
 /oeminfo        emmc            /dev/block/bootdevice/by-name/oeminfo    		flags=display="OEMinfo";backup=1
 /splash2	ext4		/dev/block/bootdevice/by-name/splash2			flags=display="Splash2";backup=1
 /3rdmodem	ext4		/dev/block/bootdevice/by-name/3rdmodem   		flags=display="3rdmodem";backup=1
