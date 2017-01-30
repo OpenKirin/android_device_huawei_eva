@@ -5,19 +5,13 @@ on init
 
     symlink /dev/block/platform/hi_mci.0 /dev/block/bootdevice
 
+on fs
+    start teecd
+    start volisnotd
+
 on boot
     chown system system /sys/devices/ff200000.hisi_usb/plugusb
     chmod 0660 /sys/devices/ff200000.hisi_usb/plugusb
-
-on property:ro.decrypt.data=0
-    start teecd
-    start volisnotd
-    setprop ro.decrypt.data 1
-
-on property:ro.decrypt.data=1
-    stop teecd
-    stop volisnotd
-    start recovery
 
 service teecd /sbin/teecd
     user root
@@ -30,10 +24,3 @@ service volisnotd /sbin/volisnotd -m
     group root
     disabled
     seclabel u:r:tee:s0
-
-service_redefine recovery /sbin/recovery
-    user root
-    group root
-    disabled
-    seclabel u:r:recovery:s0
-
