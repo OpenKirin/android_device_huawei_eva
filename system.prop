@@ -29,6 +29,7 @@ ro.build.characteristics=default
 ro.build.hide=false
 ro.build.nohota=false
 
+ro.decrypt.data=0
 sys.usb.configfs=1
 sys.usb.config=mtp,adb
 # end build properties
