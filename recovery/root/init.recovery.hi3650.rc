@@ -23,4 +23,5 @@ service volisnotd /sbin/volisnotd -m
     user root
     group root
     disabled
+    oneshot
     seclabel u:r:tee:s0
