@@ -281,8 +281,6 @@ static void power_hint(__attribute__((unused)) struct power_module *module,
 
     switch (hint) {
     case POWER_HINT_INTERACTION:
-    case POWER_HINT_LAUNCH_BOOST:
-    case POWER_HINT_CPU_BOOST:
         if (is_profile_valid(current_power_profile) < 0) {
             ALOGD("%s: no power profile selected yet", __func__);
             return;
@@ -308,11 +306,6 @@ static void power_hint(__attribute__((unused)) struct power_module *module,
             }
         }
         break;
-    case POWER_HINT_SET_PROFILE:
-        pthread_mutex_lock(&lock);
-        set_power_profile(*(int32_t *)data);
-        pthread_mutex_unlock(&lock);
-        break;
     case POWER_HINT_VIDEO_ENCODE:
         pthread_mutex_lock(&lock);
         process_video_encode_hint(data);
@@ -327,27 +320,10 @@ static struct hw_module_methods_t power_module_methods = {
     .open = NULL,
 };
 
-static int get_feature(__attribute__((unused)) struct power_module *module,
-                       feature_t feature)
-{
-    int ret = -1;
-    switch (feature) {
-    case POWER_FEATURE_SUPPORTED_PROFILES:
-	ret = PROFILE_MAX;
-	break;
-    default:
-        break;
-    }
-    return ret;
-}
-
 static void set_feature(__attribute__((unused)) struct power_module *module,
                        feature_t feature, int mode)
 {
     switch (feature) {
-    case POWER_FEATURE_SUPPORTED_PROFILES:
-        ALOGI("POWER_FEATURE_SUPPORTED_PROFILES: %d",mode);
-	break;
     default:
         break;
     }
@@ -360,13 +336,12 @@ struct power_module HAL_MODULE_INFO_SYM = {
         .hal_api_version = HARDWARE_HAL_API_VERSION,
         .id = POWER_HARDWARE_MODULE_ID,
         .name = "HI3650 Power HAL",
-        .author = "Surdu Petru",
+        .author = "Surdu Petru, Alexander Pohl",
         .methods = &power_module_methods,
     },
 
     .init = power_init,
     .setInteractive = power_set_interactive,
     .powerHint = power_hint,
-    .setFeature = set_feature,
-    .getFeature = get_feature
+    .setFeature = set_feature
 };
