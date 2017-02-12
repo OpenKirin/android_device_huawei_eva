@@ -1,1 +1,1 @@
-add_lunch_combo lineage_eva-userdebug
+add_lunch_combo aosp_eva-userdebug

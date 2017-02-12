@@ -1,0 +1,11 @@
+Dependencies
+============
+vendor/huawei/eva - branch: 7.x - https://github.com/OpenKirin/android_vendor_huawei_eva
+vendor/nxp-nfc/opensource/frameworks - branch: cm-14.1 - https://github.com/LineageOS/android_vendor_nxp-nfc_opensource_frameworks
+vendor/nxp-nfc/opensource/libnfc-nci - branch: cm-14.1 - https://github.com/LineageOS/android_vendor_nxp-nfc_opensource_libnfc-nci
+vendor/nxp-nfc/opensource/Nfc - branch: cm-14.1 - https://github.com/LineageOS/android_vendor_nxp-nfc_opensource_Nfc
+
+Prebuilts from other sources
+============================
+frameworks/native/build/phone-xxhdpi-3072-dalvik-heap.mk - https://raw.githubusercontent.com/LineageOS/android_frameworks_native/cm-14.1/build/phone-xxhdpi-3072-dalvik-heap.mk
+frameworks/native/build/phone-xxhdpi-3072-hwui-memory.mk - https://raw.githubusercontent.com/LineageOS/android_frameworks_native/cm-14.1/build/phone-xxhdpi-3072-hwui-memory.mk

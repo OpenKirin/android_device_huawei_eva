@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2016 The CyanogenMod Project
+# Copyright (C) 2017 OpenKirin
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,9 +14,15 @@
 # limitations under the License.
 #
 
-$(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
+# Prebuilt kernel
+ifeq ($(TARGET_PREBUILT_KERNEL),)
+  LOCAL_KERNEL := device/huawei/eva/kernel
+else
+  LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
+endif
 
-$(call inherit-product-if-exists, vendor/huawei/eva/eva-vendor.mk)
+PRODUCT_COPY_FILES := \
+    $(LOCAL_KERNEL):kernel
 
 # Overlay
 DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
@@ -99,10 +105,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.fingerprint.xml:system/etc/permissions/android.hardware.fingerprint.xml
 
-# Gello
-PRODUCT_PACKAGES += \
-    Gello
-
 # Ramdisk
 PRODUCT_PACKAGES += \
     fstab.hi3650 \
@@ -117,10 +119,6 @@ PRODUCT_PACKAGES += \
     init.hi3650.usb.configfs.rc \
     init.hi3650.usb.rc \
     ueventd.hi3650.rc
-
-# SNAP Camera
-PRODUCT_PACKAGES += \
-    Snap
 
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.magic.api.version=0.1 \
@@ -156,10 +154,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # USB
 PRODUCT_PACKAGES += \
     com.android.future.usb.accessory
-
-# Bootanim
-PRODUCT_PACKAGES += \
-    bootanimation.zip
 
 # NFC
 PRODUCT_PACKAGES += \
