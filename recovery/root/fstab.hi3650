@@ -20,4 +20,3 @@
 /dev/block/bootdevice/by-name/3rdmodemnvmbkp         /3rdmodemnvmbkp                ext4      rw,nosuid,nodev,noatime,data=ordered,context=u:object_r:radio_data_file:s0 wait,check
 /dev/block/bootdevice/by-name/secure_storage         /sec_storage                ext4      rw,nosuid,nodev,noatime,discard,auto_da_alloc,mblk_io_submit,data=journal,context=u:object_r:teecd_data_file:s0 wait,check
 /dev/block/bootdevice/by-name/misc       /misc       emmc      defaults        defaults
-

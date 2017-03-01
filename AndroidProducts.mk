@@ -15,5 +15,4 @@
 #
 
 PRODUCT_MAKEFILES := \
-	$(LOCAL_DIR)/omni_eva.mk \
-	$(LOCAL_DIR)/full_eva.mk
+	$(LOCAL_DIR)/omni_eva.mk

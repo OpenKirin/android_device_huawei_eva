@@ -17,9 +17,31 @@
 ## Specify phone tech before including full_phone
 $(call inherit-product, vendor/omni/config/gsm.mk)
 
-$(call inherit-product, device/huawei/eva/full_eva.mk)
+# Inherit from the common Open Source product configuration
+$(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base_telephony.mk)
 
 # Inherit some common Omni stuff.
 $(call inherit-product, vendor/omni/config/common.mk)
 
+PRODUCT_PACKAGES += \
+    charger_res_images \
+    charger \
+    tmp_timer
+
+ADDITIONAL_DEFAULT_PROPERTIES += \
+    ro.secure=0 \
+    ro.adb.secure=0 \
+    security.perf_harden=0 \
+    ro.allow.mock.location=1
+
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+    sys.usb.configfs=1 \
+    sys.usb.config=mtp,adb \
+    persist.sys.usb.config=manufacture,adb \
+    sys.usb.controller=ff100000.dwc3
+
 PRODUCT_NAME := omni_eva
+PRODUCT_DEVICE := eva
+PRODUCT_BRAND := Huawei
+PRODUCT_MODEL := eva
+PRODUCT_MANUFACTURER := HUAWEI
