@@ -14,4 +14,8 @@
 # limitations under the License.
 #
 
+ifeq ($(TARGET_DEVICE), berlin)
+
 include $(call all-makefiles-under, $(call my-dir))
+
+endif

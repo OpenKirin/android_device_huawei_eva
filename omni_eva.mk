@@ -25,8 +25,7 @@ $(call inherit-product, vendor/omni/config/common.mk)
 
 PRODUCT_PACKAGES += \
     charger_res_images \
-    charger \
-    tmp_timer
+    charger
 
 ADDITIONAL_DEFAULT_PROPERTIES += \
     ro.secure=0 \

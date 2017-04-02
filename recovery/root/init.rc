@@ -94,7 +94,7 @@ on late-init
     # Remove a file to wake up anything waiting for firmware
     trigger firmware_mounts_complete
 
-on property:ro.timer.finished=true
+on property:init.svc.volisnotd=stopped
     trigger early-boot
     trigger boot
 

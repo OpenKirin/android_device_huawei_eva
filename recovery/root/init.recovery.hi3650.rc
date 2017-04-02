@@ -1,10 +1,13 @@
 import /init.recovery.hi3650.usb.rc
 
-on fs
+on init
     symlink /dev/block/platform/hi_mci.0 /dev/block/bootdevice
+
+on property:ro.board.platform=hi3650
     start teecd
+
+on fs
     start volisnotd
-    start tmp_timer
 
 service teecd /sbin/teecd
     user root
@@ -19,7 +22,17 @@ service volisnotd /sbin/volisnotd -m
     disabled
     seclabel u:r:tee:s0
 
-service tmp_timer /sbin/tmp_timer
-    oneshot
-    disabled
-    seclabel u:r:recovery:s0
+on property:vold.decrypt=trigger_shutdown_framework
+    class_reset server
+
+on property:vold.decrypt=trigger_load_persist_props
+    load_persist_props
+
+on property:vold.decrypt=trigger_post_fs_data
+    trigger post-fs-data
+
+on post-fs-data
+    trigger post-fs-data_hw
+
+on post-fs-data_hw
+    setprop vold.post_fs_data_done 1
