@@ -18,9 +18,6 @@ DEVICE_PATH := device/huawei/eva
 
 include device/hisi/3650-common/BoardConfigCommon.mk
 
-# Kernel
-TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/kernel
-
 # Partitions
 BOARD_BOOTIMAGE_PARTITION_SIZE := 33554432
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 67108864
