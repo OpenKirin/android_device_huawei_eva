@@ -1,0 +1,6 @@
+# limit_current daemon
+type limit_current, domain, domain_deprecated;
+type limit_current_exec, exec_type, file_type;
+
+# Started by init
+init_daemon_domain(limit_current)

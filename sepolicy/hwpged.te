@@ -1,0 +1,6 @@
+# hwpged daemon
+type hwpged, domain, domain_deprecated;
+type hwpged_exec, exec_type, file_type;
+
+# Started by init
+init_daemon_domain(hwpged)

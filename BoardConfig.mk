@@ -20,13 +20,13 @@ TARGET_ARCH := arm64
 TARGET_ARCH_VARIANT := armv8-a
 TARGET_CPU_ABI := arm64-v8a
 TARGET_CPU_ABI2 :=
-TARGET_CPU_VARIANT := generic
+TARGET_CPU_VARIANT := cortex-a53
 
 TARGET_2ND_ARCH := arm
 TARGET_2ND_ARCH_VARIANT := armv7-a-neon
 TARGET_2ND_CPU_ABI := armeabi-v7a
 TARGET_2ND_CPU_ABI2 := armeabi
-TARGET_2ND_CPU_VARIANT := cortex-a15
+TARGET_2ND_CPU_VARIANT := cortex-a53
 
 TARGET_CPU_SMP := true
 ARCH_ARM_HAVE_TLS_REGISTER := true
@@ -65,8 +65,6 @@ TARGET_BOOTANIMATION_TEXTURE_CACHE := true
 
 # Camera
 USE_CAMERA_STUB := false
-BOARD_CAMERA_HAVE_ISO := true
-TARGET_GLOBAL_CFLAGS += -DHAVE_ISO
 USE_DEVICE_SPECIFIC_CAMERA := true
 
 # Charger 
@@ -99,12 +97,14 @@ BOARD_KERNEL_BASE := 0x00478000
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_KERNEL_CMDLINE := loglevel=4 page_tracker=on androidboot.selinux=permissive
 BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x00008000 --ramdisk_offset 0x07b88000 --tags_offset 0x07588000
-TARGET_KERNEL_ARCH := arm64
-TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
-TARGET_KERNEL_HEADER_ARCH := arm64
+#TARGET_KERNEL_ARCH := arm64
+#TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
+#TARGET_KERNEL_HEADER_ARCH := arm64
 
-TARGET_KERNEL_SOURCE := kernel/huawei/eva
-TARGET_KERNEL_CONFIG := cm_hi3650_defconfig
+#TARGET_KERNEL_SOURCE := kernel/huawei/eva
+#TARGET_KERNEL_CONFIG := eva_defconfig
+
+TARGET_KERNEL_PREBUILT := device/huawei/eva/kernel
 
 # Lights
 TARGET_PROVIDES_LIBLIGHT := true
@@ -113,7 +113,6 @@ TARGET_PROVIDES_LIBLIGHT := true
 BOARD_HAS_LARGE_FILESYSTEM := true
 BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_PERSISTIMAGE_FILE_SYSTEM_TYPE := ext4
-#BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
 TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := true
 BOARD_BOOTIMAGE_PARTITION_SIZE := 33554432
@@ -122,7 +121,6 @@ BOARD_SYSTEMIMAGE_PARTITION_SIZE := 2080374784
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 26935820288
 BOARD_CACHEIMAGE_PARTITION_SIZE := 268435456
 BOARD_PERSISTIMAGE_PARTITION_SIZE := 2097152
-#BOARD_VENDORIMAGE_PARTITION_SIZE := 637534208
 BOARD_FLASH_BLOCK_SIZE := 131072
 
 # Properties
@@ -130,7 +128,7 @@ TARGET_SYSTEM_PROP := $(LOCAL_PATH)/system.prop
 
 # Recovery
 TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/rootdir/fstab.hi3650
-#TARGET_RECOVERY_DEVICE_MODULES := libinit_hi3650
+TARGET_RECOVERY_DEVICE_MODULES := libinit_hi3650
 
 # RIL
 TARGET_GLOBAL_CFLAGS += -DDISABLE_ASHMEM_TRACKING
@@ -141,16 +139,18 @@ TARGET_RIL_VARIANT := proprietary
 # Enable WEBGL
 ENABLE_WEBGL := true
 
-USE_NINJA := false
-
 # Vendor
 BOARD_NEEDS_VENDORIMAGE_SYMLINK := true
 TARGET_COPY_OUT_VENDOR := system
 
 # Vendor Init
-#TARGET_UNIFIED_DEVICE := true
-#TARGET_INIT_VENDOR_LIB := libinit_hi3650
-#TARGET_LIBINIT_DEFINES_FILE := $(LOCAL_PATH)/init/init_eva.cpp
+TARGET_UNIFIED_DEVICE := true
+TARGET_INIT_VENDOR_LIB := libinit_hi3650
+TARGET_LIBINIT_DEFINES_FILE := $(LOCAL_PATH)/init/init_eva.cpp
+
+# Sepolicy
+BOARD_SEPOLICY_DIRS += \
+	device/huawei/eva/sepolicy
 
 # Wifi
 TARGET_USES_64_BIT_BCMDHD	 := true
@@ -162,9 +162,9 @@ BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_bcmdhd
 BOARD_HOSTAPD_DRIVER             := NL80211
 BOARD_HOSTAPD_PRIVATE_LIB        := lib_driver_cmd_bcmdhd
 WIFI_DRIVER_FW_PATH_PARAM        := "/sys/module/bcmdhd/parameters/firmware_path"
-WIFI_DRIVER_FW_PATH_STA          := "/system/vendor/firmware/fw_bcm43455_hw.bin"
-WIFI_DRIVER_FW_PATH_AP           := "/system/vendor/firmware/fw_bcm43455_apsta_hw.bin"
-WIFI_DRIVER_FW_PATH_P2P          := "/system/vendor/firmware/fw_bcm43455_hw.bin"
+WIFI_DRIVER_FW_PATH_STA          := "/vendor/firmware/fw_bcm43455_hw.bin"
+WIFI_DRIVER_FW_PATH_AP           := "/vendor/firmware/fw_bcm43455_apsta_hw.bin"
+WIFI_DRIVER_FW_PATH_P2P          := "/vendor/firmware/fw_bcm43455_hw.bin"
 WIFI_BAND                        := 802_11_ABG
 
 # inherit from the proprietary version

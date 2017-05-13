@@ -1,0 +1,6 @@
+# secure_storage daemon
+type secure_storage, domain, domain_deprecated;
+type secure_storage_exec, exec_type, file_type;
+
+# Started by init
+init_daemon_domain(secure_storage)

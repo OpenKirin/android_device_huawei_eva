@@ -1,0 +1,6 @@
+# mac_addr_normalization daemon
+type mac_addr_normalization, domain, domain_deprecated;
+type mac_addr_normalization_exec, exec_type, file_type;
+
+# Started by init
+init_daemon_domain( mac_addr_normalization)

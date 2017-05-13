@@ -27,16 +27,10 @@ service adbd /sbin/adbd --root_seclabel=u:r:su:s0
 on property:ro.kernel.qemu=1
     start adbd
 
-service usbshell /sbin/usbshell --root_seclabel=u:r:su:s0
-    class core
-    disabled
-    seclabel u:r:usbshell:s0
-
 on property:sys.usb.config=none && property:sys.usb.configfs=0
     stop hw_cdma_service
     stop adbd
     stop hdbd
-    stop usbshell
     setprop sys.usb.start_modempcui 0
     write /sys/class/android_usb/android0/enable 0
     write /sys/class/android_usb/android0/bDeviceClass 0
@@ -167,7 +161,6 @@ on property:sys.usb.config=rndis,serial,adb && property:sys.usb.configfs=0
     setprop sys.usb.start_atdiag 1
     write /sys/class/net/rndis0/queues/rx-0/rps_cpus f
     setprop sys.usb.state ${sys.usb.config}
-
 
 on property:sys.usb.config=ptp && property:sys.usb.configfs=0
     write /sys/class/android_usb/android0/enable 0
@@ -467,14 +460,6 @@ on property:sys.usb.config=midi,adb && property:sys.usb.configfs=0
     stop diagserver
     stop atcmdserver
 
- on property:sys.usb.start_modempcui=1
-    start hw_modem_service
-    start hw_pcui_service
-
- on property:sys.usb.start_modempcui=0
-    stop hw_modem_service
-    stop hw_pcui_service
-
 on property:persist.sys.usb.config=*
     setprop sys.usb.config ${persist.sys.usb.config}
 
@@ -486,8 +471,6 @@ service hdbd /sbin/hdbd --root_seclabel=u:r:su:s0
 
 service hw_ueventd /sbin/hw_ueventd
     class main
-	seclabel u:r:hw_ueventd:s0
-
 
 on property:sys.usb.typec.mode=dfp
     write /sys/class/dual_role_usb/otg_default/mode ${sys.usb.typec.mode}

@@ -14,8 +14,6 @@
 # limitations under the License.
 #
 
-$(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
-
 $(call inherit-product-if-exists, vendor/huawei/eva/eva-vendor.mk)
 
 # Overlay
@@ -34,7 +32,11 @@ PRODUCT_COPY_FILES += \
 
 # GPS
 PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/prebuilts/clatd.conf:system/etc/clatd.conf \
     $(LOCAL_PATH)/prebuilts/gps.conf:system/etc/gps.conf
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/kernel:kernel
 
 # Permissions
 PRODUCT_COPY_FILES += \
@@ -68,8 +70,10 @@ PRODUCT_COPY_FILES += \
 
 # Vulkan
 PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/android.hardware.vulkan.level-0.xml:system/etc/permissions/android.hardwarevulkan.level-0.xml \
-    frameworks/native/data/etc/android.hardware.vulkan.version-1_0_3.xml:system/etc/permissions/android.hardware.vulkan.version-1_0_3.xml
+    frameworks/native/data/etc/android.hardware.vulkan.level-0.xml:system/etc/permissions/android.hardware.vulkan.level-0.xml \
+    frameworks/native/data/etc/android.hardware.vulkan.version-1_0_3.xml:system/etc/permissions/android.hardware.vulkan.version-1_0_3.xml \
+    frameworks/native/data/etc/android.hardware.vulkan.level-0.xml:system/etc/permissions/android.hardware.vulkan.level.xml \
+    frameworks/native/data/etc/android.hardware.vulkan.version-1_0_3.xml:system/etc/permissions/android.hardware.vulkan.version.xml
 
 # Screen density
 PRODUCT_AAPT_CONFIG := normal
@@ -109,10 +113,11 @@ PRODUCT_PACKAGES += \
     fstab.zram512m \
     fstab.zram1024m \
     fstab.zram1536m \
+    init.charger.rc \
+    init.chip.charger.rc \
     init.chip.usb.rc \
     init.hi3650.gps.rc \
     init.hi3650.power.rc \
-    init.hi3650.power.sh \
     init.hi3650.rc \
     init.hi3650.usb.configfs.rc \
     init.hi3650.usb.rc \
@@ -122,55 +127,35 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     Snap
 
+# LIBShim
+PRODUCT_PACKAGES += \
+    libshim_gralloc
+
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.magic.api.version=0.1 \
     ro.enable_boot_charger_mode=0 \
-    persist.sys.root_access=1 \
     persist.sys.usb.config=manufacture,adb \
     sys.usb.configfs=1 \
-    sys.usb.controller=ff100000.dwc3 \
-    persist.service.adb.enable=1
-
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.build.selinux=0 \
-    persist.sys.root_access=1
-
-# adb as root
-ADDITIONAL_DEFAULT_PROPERTIES += ro.secure=0
-ADDITIONAL_DEFAULT_PROPERTIES += ro.adb.secure=0
-ADDITIONAL_DEFAULT_PROPERTIES += security.perf_harden=0
-ADDITIONAL_DEFAULT_PROPERTIES += ro.allow.mock.location=1
-
-# HWC
-#PRODUCT_PACKAGES += \
-#    hwcomposer.hi3650
+    sys.usb.controller=ff100000.dwc3
 
 # Power HAL
 PRODUCT_PACKAGES += \
     power.hi3650
 
-# LTE, CDMA, GSM/WCDMA
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.telephony.ril.config=simactivation
-
 # USB
 PRODUCT_PACKAGES += \
     com.android.future.usb.accessory
-
-# Bootanim
-PRODUCT_PACKAGES += \
-    bootanimation.zip
 
 # NFC
 PRODUCT_PACKAGES += \
     com.android.nfc_extras \
     com.nxp.nfc.nq \
+    libnqnfc-nci \
+    libp61-jcop-kit \
     nfc_nci.nqx.default \
     NQNfcNci \
     nqnfcee_access.xml \
     nqnfcse_access.xml \
-    libnqnfc-nci \
-    libp61-jcop-kit \
     Tag
 
 PRODUCT_COPY_FILES += \

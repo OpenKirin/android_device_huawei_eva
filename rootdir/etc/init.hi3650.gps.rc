@@ -50,7 +50,7 @@ service gpsdcl_47531  /vendor/bin/glgps47531cl -c /data/gps/gpsconfig.xml
     group system inet sdcard_rw wakelock
     disabled
 
-service ipld /product/bin/inv_ipld  /data/gps/inv_ipld.prop
+service ipld /system/bin/inv_ipld  /data/gps/inv_ipld.prop
     class late_start
     user system
     group system sdcard_rw

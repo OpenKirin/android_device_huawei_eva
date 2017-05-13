@@ -14,19 +14,15 @@
 
 $(call inherit-product, device/huawei/eva/full_eva.mk)
 
-# Inherit some common CM stuff.
-$(call inherit-product, vendor/cm/config/common_full_phone.mk)
-
 # Boot animation
 TARGET_SCREEN_HEIGHT := 1920
 TARGET_SCREEN_WIDTH := 1080
 
+PRODUCT_GMS_CLIENTID_BASE := android-huawei
+
 PRODUCT_NAME := lineage_eva
 BOARD_VENDOR := huawei
 
-PRODUCT_GMS_CLIENTID_BASE := android-huawei
-
 PRODUCT_BUILD_PROP_OVERRIDES += \
     BUILD_FINGERPRINT="HUAWEI/EVA-L09/HWEVA:7.0/HUAWEIEVA-L09/C432B361:user/release-keys" \
-    PRIVATE_BUILD_DESC="EVA-L09-user 7.0 HUAWEIEVA-L09 C432B361 release-keys" \
-    PRODUCT_NAME=EVA
+    PRIVATE_BUILD_DESC="EVA-L09-user 7.0 HUAWEIEVA-L09 C432B361 release-keys"

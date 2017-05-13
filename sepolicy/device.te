@@ -1,0 +1,47 @@
+type oeminfo_nvm_device, dev_type, file_type;
+type teecd_device, dev_type, file_type;
+type teecd_blkdev, dev_type, file_type;
+type nve_block_device, dev_type;
+type atcmdserver_blkdev, dev_type;
+type cust_block_device, dev_type;
+type splash2_block_device, dev_type;
+type thirdmodem_block_device, dev_type;
+type shex_block_device, dev_type;
+type hisee_blkdev, dev_type;
+type thirdmodemnvm_block_device, dev_type;
+type thirdmodemnvmbkp_block_device, dev_type;
+type make_ext4fs_blkdev, dev_type;
+type secure_storage_block_device, dev_type;
+type modemnvm_block_device, dev_type;
+type zram_device, dev_type;
+
+type act_device, dev_type;
+type bastet_device, dev_type;
+type modem_device, dev_type;
+type dev_fingerprinthub, dev_type;
+type flp_device, dev_type;
+type haptic_device, dev_type;
+type ivp_device, dev_type;
+type teelog_device, dev_type;
+type jank_device, dev_type;
+type exception_device, dev_type;
+type ptm_device, dev_type;
+type logcat_device, dev_type;
+type hi110x_dev, dev_type;
+type isplog_device, dev_type;
+type madapt_device, dev_type;
+type pmom_device, dev_type;
+type rpmsg_hisi_device, dev_type;
+type msghub_socket, file_type;
+type hwnff_socket, file_type;
+type iawared_socket, file_type;
+type vowifi_proxy_device, dev_type;
+type wlanfty_device, dev_type;
+type recovery_device, dev_type;
+type tee_multi_user_socket, dev_type;
+type irda_device, dev_type;
+
+
+
+
+

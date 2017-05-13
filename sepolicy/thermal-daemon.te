@@ -1,0 +1,12 @@
+# thermal-daemon daemon
+type thermal-daemon, domain, domain_deprecated;
+type thermal-daemon_exec, exec_type, file_type;
+
+# Started by init
+init_daemon_domain(thermal-daemon)
+
+# Allow to read and write cpufreq sysfs
+allow thermal-daemon sysfs_devices_system_cpu:file rw_file_perms;
+
+# This is required for wake alarm access
+allow thermal-daemon self:capability2 wake_alarm;

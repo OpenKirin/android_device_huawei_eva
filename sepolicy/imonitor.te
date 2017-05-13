@@ -1,0 +1,6 @@
+# imonitor daemon
+type imonitor, domain, domain_deprecated;
+type imonitor_exec, exec_type, file_type;
+
+# Started by init
+init_daemon_domain(imonitor)

@@ -1,0 +1,6 @@
+# vr_daemon daemon
+type tui_daemon, domain, domain_deprecated;
+type tui_daemon_exec, exec_type, file_type;
+
+# Started by init
+init_daemon_domain(tui_daemon)

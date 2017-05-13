@@ -1,0 +1,6 @@
+# data_cleaner daemon
+type data_cleaner, domain, domain_deprecated;
+type data_cleaner_exec, exec_type, file_type;
+
+# Started by init
+init_daemon_domain(data_cleaner)

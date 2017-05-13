@@ -281,7 +281,7 @@ static void power_hint(__attribute__((unused)) struct power_module *module,
 
     switch (hint) {
     case POWER_HINT_INTERACTION:
-    case POWER_HINT_LAUNCH_BOOST:
+    case POWER_HINT_LAUNCH:
     case POWER_HINT_CPU_BOOST:
         if (is_profile_valid(current_power_profile) < 0) {
             ALOGD("%s: no power profile selected yet", __func__);

@@ -1,0 +1,6 @@
+# atcmdserver daemon
+type atcmdserver, domain, domain_deprecated;
+type atcmdserver_exec, exec_type, file_type;
+
+# Started by init
+init_daemon_domain(atcmdserver)

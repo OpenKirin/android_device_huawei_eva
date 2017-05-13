@@ -1,0 +1,6 @@
+# hivwserver daemon
+type hivwserver, domain, domain_deprecated;
+type hivwserver_exec, exec_type, file_type;
+
+# Started by init
+init_daemon_domain(hivwserver)

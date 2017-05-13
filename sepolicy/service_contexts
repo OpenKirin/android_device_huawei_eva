@@ -1,0 +1,3 @@
+# Huawei camera service
+
+huawei.camera.cfgsvr            u:object_r:hwcamcfg_service:s0

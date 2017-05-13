@@ -1,0 +1,45 @@
+type sysfs_led, fs_type, sysfs_type;
+
+type sysfs_backlight, fs_type, sysfs_type;
+
+type sysfs_brightness, fs_type, sysfs_type;
+
+type sysfs_gpu, fs_type, sysfs_type;
+
+type sysfs_charger, fs_type, sysfs_type;
+
+type teecd_data_file, file_type, data_file_type;
+
+type splash2_data_file, file_type, data_file_type;
+
+type modem_log_file, file_type;
+
+type modem_nv_file, file_type;
+
+type modem_fw_file, fs_type, contextmount_type;
+
+type logcat_data_file, file_type, data_file_type;
+
+type data_misc_oma_file, file_type;
+
+type hwsystemmanager_data_file, file_type, data_file_type;
+
+type hsm_data_file, file_type, data_file_type;
+
+type cifs_t, fs_type;
+
+type sysfs_pg, fs_type, sysfs_type;
+
+type sysfs_huawei_sensor, fs_type, sysfs_type;
+
+type sysfs_framebuffer, fs_type, sysfs_type;
+
+type sysfs_tp_color, fs_type, sysfs_type;
+
+type sysfs_vibrator, fs_type, sysfs_type;
+
+type sysfs_touchscreen, fs_type, sysfs_type;
+
+type sysfs_fingerprint, fs_type, sysfs_type;
+
+type sysfs_swstate, fs_type, sysfs_type;

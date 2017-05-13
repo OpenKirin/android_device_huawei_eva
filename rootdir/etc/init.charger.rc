@@ -1,0 +1,143 @@
+import /init.hi3650.usb.rc
+import /init.hi3650.usb.configfs.rc
+import /init.chip.charger.rc
+
+on early-init
+    restorecon /postinstall
+    write /proc/1/oom_score_adj -1000
+    write /proc/sys/kernel/sysrq 0
+    restorecon /adb_keys
+    mkdir /mnt 0775 root system
+    start ueventd
+
+on init
+    export ANDROID_ROOT /system
+    export ANDROID_DATA /data
+    export EXTERNAL_STORAGE /sdcard
+    sysclktz 0
+
+    copy /proc/cmdline /dev/urandom
+    copy /default.prop /dev/urandom
+    symlink /system/etc /etc
+    symlink /sys/kernel/debug /d
+    mkdir /sdcard
+    mkdir /system
+    mkdir /data
+    mkdir /cache
+    mkdir /sec_storage
+    mkdir /config 0500 root root
+
+    write /proc/sys/kernel/panic_on_oops 1
+    write /proc/sys/vm/max_map_count 1000000
+    symlink /system/vendor /vendor
+    mkdir /usb
+    mkdir /cust
+    mkdir /splash2
+    chown system system /dev/cpuctl
+    chown system system /dev/cpuctl/tasks
+
+    write /sys/module/hisi_nve/parameters/nve /dev/block/bootdevice/by-name/nvme
+    wait /dev/nve0
+    chmod 0640 /dev/nve0
+    chown root system /dev/nve0
+
+    chown system system /sys/class/devfreq/ddrfreq/max_freq
+    chmod 664 /sys/class/devfreq/ddrfreq/max_freq
+    chown system system /sys/class/devfreq/ddrfreq/min_freq
+    chmod 664 /sys/class/devfreq/ddrfreq/min_freq
+
+on charger
+    trigger cust_parse_action
+    class_start charger
+    wait /dev/block/bootdevice/by-name/oeminfo
+    start oeminfo_nvm
+    start teecd
+
+on property:sys.powerctl=*
+   powerctl ${sys.powerctl}
+
+service ueventd /sbin/hw_ueventd
+    critical
+    seclabel u:r:ueventd:s0
+
+service charger /sbin/hw_healthd -p
+    class charger
+    critical
+    seclabel u:r:healthd:s0
+
+on property:vold.decrypt=trigger_default_encryption
+    start defaultcrypto
+
+on nonencrypted
+    trigger data_ready
+
+on data_ready
+    setprop sys.userdata_is_ready 1
+    start logctl_service
+    start logcat_service
+    start chargemonitor
+
+on post-fs-data
+    setprop vold.post_fs_data_done 1
+
+on property:vold.decrypt=trigger_restart_framework
+    trigger data_ready
+
+on property:vold.decrypt=trigger_post_fs_data
+    trigger post-fs-data
+
+on cust_parse_action
+    cust_parse
+
+
+service defaultcrypto /system/bin/vdc --wait cryptfs mountdefaultencrypted
+    disabled
+    oneshot
+
+service teecd /sbin/teecd
+    disabled
+    user root
+    group root
+    seclabel u:r:tee:s0
+
+service logctl_service /sbin/logctl_service -m 1
+    class late_start
+    user root
+    group system
+    oneshot
+    seclabel u:r:hisilogcat:s0
+
+service logcat_service /sbin/logctl_service -m 1 -t 1
+    class late_start
+    user root
+    group system
+    oneshot
+    seclabel u:r:hisilogcat:s0
+
+service chargelogcat /system/vendor/bin/chargelogcat -r 4096 -n 5 -z 4 -t 5 -p /data/log/charge-log/
+    class late_start
+    user root
+    group system
+    disabled
+    seclabel u:r:hisilogcat:s0
+
+service kmsglogcat /sbin/kmsgcat -r 4096 -z 5 -n 5 -f /data/log/android_logs/kmsgcat-log
+    class late_start
+    user root
+    group system
+    disabled
+    seclabel u:r:hisilogcat:s0
+
+service chargemonitor /system/vendor/bin/chargemonitor
+    class late_start
+    user root
+    group system
+    seclabel u:r:hisilogcat:s0
+
+service atcmdserver  /vendor/bin/atcmdserver
+    disabled
+
+service oeminfo_nvm /sbin/oeminfo_nvm_server
+    critical
+    ioprio rt 4
+    seclabel u:r:oeminfo_nvm:s0
