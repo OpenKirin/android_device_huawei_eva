@@ -15,6 +15,9 @@
 
 LOCAL_PATH := device/huawei/eva
 
+# disable Ninja
+USE_NINJA=false
+
 # Architecture
 TARGET_ARCH := arm64
 TARGET_ARCH_VARIANT := armv8-a
@@ -97,14 +100,14 @@ BOARD_KERNEL_BASE := 0x00478000
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_KERNEL_CMDLINE := loglevel=4 page_tracker=on androidboot.selinux=permissive
 BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x00008000 --ramdisk_offset 0x07b88000 --tags_offset 0x07588000
-#TARGET_KERNEL_ARCH := arm64
-#TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
-#TARGET_KERNEL_HEADER_ARCH := arm64
+TARGET_KERNEL_ARCH := arm64
+TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
+TARGET_KERNEL_HEADER_ARCH := arm64
 
-#TARGET_KERNEL_SOURCE := kernel/huawei/eva
-#TARGET_KERNEL_CONFIG := eva_defconfig
+TARGET_KERNEL_SOURCE := kernel/huawei/hi3650
+TARGET_KERNEL_CONFIG := hisi_3650_defconfig
 
-TARGET_KERNEL_PREBUILT := device/huawei/eva/kernel
+#TARGET_KERNEL_PREBUILT := device/huawei/eva/kernel
 
 # Lights
 TARGET_PROVIDES_LIBLIGHT := true

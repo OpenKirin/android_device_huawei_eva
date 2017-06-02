@@ -29,6 +29,6 @@
 /dev/block/bootdevice/by-name/boot       		/boot          	emmc    defaults                                                 	defaults
 /dev/block/bootdevice/by-name/recovery   		/recovery      	emmc    defaults                                                 	defaults
 
-/devices/platform/hi_mci.1/mmc_host/mmc1/*             	auto           	auto    defaults							voldmanaged=sdcard:1,noemulatedsd
-/devices/platform/ff200000.hisi_usb/ff100000.dwc3/*    	auto           	auto    defaults							voldmanaged=usbotg:1
+/devices/platform/hi_mci.1/mmc_host/mmc1/*             	auto           	auto    defaults							voldmanaged=sdcard:auto,noemulatedsd
+/devices/platform/ff200000.hisi_usb/ff100000.dwc3/*    	auto           	auto    defaults							voldmanaged=usbotg:auto
 
