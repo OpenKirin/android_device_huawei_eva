@@ -24,7 +24,18 @@ gsm.fastdormancy.mode=3
 # Performance
 ro.am.reschedule_service=true
 
-# RIL
+# RIL common
+ro.multi.rild=false
+rild.rild1_ready_to_start=false
+ro.config.is_start_commril=true
+
+ro.telephony.ril_class=HwHisiRIL
+audioril.lib=libhuawei-audio-ril.so
+persist.radio.apm_sim_not_pwdn=1
+
+# VoLTE
+ro.config.hw_volte_on=true
+
 rild.libargs=-m modem0
 rild.libpath=/vendor/lib64/libbalong-ril.so
 ro.config.default_commril_mode=ULG_MODE
@@ -38,6 +49,4 @@ ro.telephony.default_network=9
 net.tethering.noprovisioning=true
 ro.config.hw_lte_support=true
 
-ro.telephony.ril_class=HwHisiRIL
-audioril.lib=libhuawei-audio-ril.so
-persist.radio.apm_sim_not_pwdn=1
+

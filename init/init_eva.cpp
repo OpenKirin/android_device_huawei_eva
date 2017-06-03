@@ -43,9 +43,6 @@ void init_target_properties()
 	return;
     }
         property_set("ro.product.model", "Huawei P9");
-        property_set("ro.multi.rild", "false");
         property_set("persist.radio.modem.cap", "899BD");
-        property_set("rild.rild1_ready_to_start", "false");
-        property_set("ro.config.is_start_commril", "true");
         property_set("ro.config.reduce_sar_type1", "001");
 }
