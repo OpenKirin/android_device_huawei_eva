@@ -35,9 +35,6 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilts/clatd.conf:system/etc/clatd.conf \
     $(LOCAL_PATH)/prebuilts/gps.conf:system/etc/gps.conf
 
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/kernel:kernel
-
 # Permissions
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.audio.low_latency.xml:system/etc/permissions/android.hardware.audio.low_latency.xml \

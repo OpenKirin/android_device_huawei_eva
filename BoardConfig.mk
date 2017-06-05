@@ -104,8 +104,6 @@ TARGET_KERNEL_HEADER_ARCH := arm64
 TARGET_KERNEL_SOURCE := kernel/huawei/hi3650
 TARGET_KERNEL_CONFIG := hisi_3650_defconfig
 
-#TARGET_KERNEL_PREBUILT := device/huawei/eva/kernel
-
 # Lights
 TARGET_PROVIDES_LIBLIGHT := true
 
