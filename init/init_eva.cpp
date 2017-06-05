@@ -48,7 +48,7 @@ void init_target_properties()
 
     fin.open("/sys/firmware/devicetree/base/hisi,boardname");
     while (getline(fin, buf))
-        if ((buf.find("EVA_L09") != std::string::npos) || (buf.find("EVA_L29") != std::string::npos))
+        if ((buf.find("EVA_L09") != std::string::npos) || (buf.find("EVA_L29") != std::string::npos) || (buf.find("EVA_TUCL") != std::string::npos))
             break;
     fin.close();
 
@@ -90,6 +90,31 @@ void init_target_properties()
         property_set("ro.config.hw_lte_support", "true");
         property_set("ro.build.description", "EVA-L29-user 7.0 HUAWEIEVA-L29 C636B361 release-keys");
         property_set("ro.build.fingerprint", "HUAWEI/EVA-L29/HWEVA:7.0/HUAWEIEVA-L29/C636B361:user/release-keys");
+    }
+    else if (buf.find("EVA_TUCL") != std::string::npos) {
+        property_set("ro.product.model", "EVA-AL10");
+        property_set("rild.libargs", "-d /dev/viacomm_cmux");
+        property_set("rild.libargs1", "-m modem0");
+        property_set("rild.libargs2", "-m modem1");
+        property_set("rild.libargs3", "-m modem2");
+        property_set("rild.libpath", "/vendor/lib64/libvia-ril.so");
+        property_set("rild.libpath1", "/vendor/lib64/libbalong-ril.so");
+        property_set("rild.libpath2", "/vendor/lib64/libbalong-ril-1.so");
+        property_set("rild.libpath3", "/vendor/lib64/libbalong-ril-2.so");
+        property_set("ro.config.default_commril_mode", "CLG_MODE");
+        property_set("ro.config.dsds_mode", "cdma_gsm");
+        property_set("ro.config.hw_device_mode", "clg_mode");
+        property_set("ro.config.hw_save_pin", "true");
+        property_set("ro.config.client_number", "5");
+        property_set("ro.config.modem_number", "4");
+        property_set("ro.config.hw_dsda", "true");
+        property_set("persist.dsds.enabled", "true");
+        property_set("persist.radio.multisim.config", "dsda");
+        property_set("ro.config.full_network_support", "true");
+        property_set("ro.telephony.default_network", "8");
+        property_set("ro.radio.vsim_support", "true");
+        property_set("ro.build.description", "EVA-AL10-user 7.0 HUAWEIEVA-AL10 C00B377 release-keys");
+        property_set("ro.build.fingerprint", "HUAWEI/EVA-AL10/HWEVA:7.0/HUAWEIEVA-AL10/C00B377:user/release-keys");
     }
     else {
 	property_set("ro.product.model", "UNKNOWN");
