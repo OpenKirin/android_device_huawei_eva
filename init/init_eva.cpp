@@ -38,11 +38,38 @@
 
 void init_target_properties()
 {
+    std::ifstream fin;
+    std::string buf;
+
     std::string platform = property_get("ro.board.platform");
     if (platform != ANDROID_TARGET) {
 	return;
     }
-        property_set("ro.product.model", "Huawei P9");
-        property_set("persist.radio.modem.cap", "899BD");
-        property_set("ro.config.reduce_sar_type1", "001");
+
+    fin.open("/sys/firmware/devicetree/base/hisi,boardname");
+    while (getline(fin, buf))
+        if ((buf.find("EVA_L09") != std::string::npos))
+            break;
+    fin.close();
+
+    if (buf.find("EVA_L09") != std::string::npos) {
+        property_set("ro.product.model", "EVA-L09");
+        property_set("rild.libargs", "-m modem0");
+        property_set("rild.libpath", "/vendor/lib64/libbalong-ril.so");
+        property_set("ro.config.default_commril_mode", "ULG_MODE");
+        property_set("ro.config.dsds_mode", "umts");
+        property_set("ro.config.client_number", "1");
+        property_set("ro.config.modem_number", "1");
+        property_set("ro.config.hw_dsda", "false");
+        property_set("persist.dsds.enabled", "false");
+        property_set("ro.config.full_network_support", "false");
+        property_set("ro.telephony.default_network", "9");
+        property_set("net.tethering.noprovisioning", "true");
+        property_set("ro.config.hw_lte_support", "true");
+        property_set("ro.build.description", "EVA-L09-user 7.0 HUAWEIEVA-L09 C432B386 release-keys");
+        property_set("ro.build.fingerprint", "HUAWEI/EVA-L09/HWEVA:7.0/HUAWEIEVA-L09/C432B386:user/release-keys");
+    }
+    else {
+	property_set("ro.product.model", "UNKNOWN");
+    }
 }
