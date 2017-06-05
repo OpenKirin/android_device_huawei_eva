@@ -48,7 +48,7 @@ void init_target_properties()
 
     fin.open("/sys/firmware/devicetree/base/hisi,boardname");
     while (getline(fin, buf))
-        if ((buf.find("EVA_L09") != std::string::npos))
+        if ((buf.find("EVA_L09") != std::string::npos) || (buf.find("EVA_L29") != std::string::npos))
             break;
     fin.close();
 
@@ -68,6 +68,28 @@ void init_target_properties()
         property_set("ro.config.hw_lte_support", "true");
         property_set("ro.build.description", "EVA-L09-user 7.0 HUAWEIEVA-L09 C432B386 release-keys");
         property_set("ro.build.fingerprint", "HUAWEI/EVA-L09/HWEVA:7.0/HUAWEIEVA-L09/C432B386:user/release-keys");
+    }
+    else if (buf.find("EVA_L29") != std::string::npos) {
+        property_set("ro.product.model", "EVA-L29");
+        property_set("rild.libargs", "-m modem0");
+        property_set("rild.libargs1", "-m modem1");
+        property_set("rild.libargs2", "-m modem2");
+        property_set("rild.libpath", "/vendor/lib64/libbalong-ril.so");
+        property_set("rild.libpath1", "/vendor/lib64/libbalong-ril-1.so");
+        property_set("rild.libpath2", "/vendor/lib64/libbalong-ril-2.so");
+        property_set("ro.config.default_commril_mode", "ULG_MODE");
+        property_set("ro.config.dsds_mode", "umts_gsm");
+        property_set("ro.config.client_number", "5");
+        property_set("ro.config.modem_number", "3");
+        property_set("ro.config.hw_dsda", "true");
+        property_set("persist.dsds.enabled", "true");
+        property_set("persist.radio.multisim.config", "dsda");
+        property_set("ro.config.full_network_support", "false");
+        property_set("ro.telephony.default_network", "9");
+        property_set("net.tethering.noprovisioning", "true");
+        property_set("ro.config.hw_lte_support", "true");
+        property_set("ro.build.description", "EVA-L29-user 7.0 HUAWEIEVA-L29 C636B361 release-keys");
+        property_set("ro.build.fingerprint", "HUAWEI/EVA-L29/HWEVA:7.0/HUAWEIEVA-L29/C636B361:user/release-keys");
     }
     else {
 	property_set("ro.product.model", "UNKNOWN");
