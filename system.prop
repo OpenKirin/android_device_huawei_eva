@@ -16,6 +16,9 @@ persist.sys.fingersense=1
 ro.opengles.version=196610
 ro.sf.lcd_density=480
 
+# Camera
+camera.hal1.packagelist=com.google.android.GoogleCamera
+
 # local
 ro.frp.pst=/dev/block/platform/hi_mci.0/by-name/frp
 ro.config.spare_ntp_server=ntp.sjtu.edu.cn,time.windows.com,time.nist.gov,1.cn.pool.ntp.org

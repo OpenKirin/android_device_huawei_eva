@@ -1050,6 +1050,8 @@ on boot
 
     setprop hifi.watchdog.come false
 
+    setprop persist.camera.HAL3.enabled 1
+
 on property:hifi.watchdog.come=true
     restart audioserver
     setprop hifi.watchdog.come false
