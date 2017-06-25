@@ -1116,7 +1116,7 @@ service HwCamCfgSvr /vendor/bin/HwCamCfgSvr hi3650 EVA
     user media
     group audio camera inet net_bt net_bt_admin net_bw_acct wakelock system
     ioprio rt 4
-    writepid /dev/cpuset/system-background/tasks
+    writepid /dev/cpuset/system-background/tasks /dev/stune/system-background/tasks
 
 service vr_daemon /system/bin/vr_daemon
     class main
@@ -1187,7 +1187,7 @@ service perfhub /vendor/bin/perfhub
     class core
     user system
     group system wakelock
-    writepid /dev/cpuset/system-background/tasks
+    writepid /dev/cpuset/system-background/tasks /dev/stune/system-background/tasks
 
 on property:persist.sys.huawei.debug.on=0
     chown system system /sys/class/sensors/sensorhub_dump
