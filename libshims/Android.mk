@@ -19,3 +19,10 @@ LOCAL_SRC_FILES := hw_gralloc.c
 LOCAL_MODULE := libshim_gralloc
 LOCAL_MODULE_TAGS := optional
 include $(BUILD_SHARED_LIBRARY)
+
+include $(CLEAR_VARS)
+LOCAL_SRC_FILES := stagefright.cpp
+LOCAL_SHARED_LIBRARIES := libstagefright_foundation
+LOCAL_MODULE := libshim_stagefright
+LOCAL_MODULE_TAGS := optional
+include $(BUILD_SHARED_LIBRARY)
