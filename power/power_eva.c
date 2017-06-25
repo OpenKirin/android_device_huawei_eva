@@ -28,43 +28,16 @@
 #include <utils/Log.h>
 
 #include "power.h"
+#include "power-feature.h"
+#include "utils.h"
 
 static pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
 static int boostpulse_fd = -1;
 static int current_power_profile = 1;
 
-static int sysfs_write_str(char *path, char *s)
-{
-    char buf[80];
-    int len;
-    int ret = 0;
-    int fd;
-
-    fd = open(path, O_WRONLY);
-    if (fd < 0) {
-        strerror_r(errno, buf, sizeof(buf));
-        ALOGE("Error opening %s: %s\n", path, buf);
-        return -1 ;
-    }
-
-    len = write(fd, s, strlen(s));
-    if (len < 0) {
-        strerror_r(errno, buf, sizeof(buf));
-        ALOGE("Error writing to %s: %s\n", path, buf);
-        ret = -1;
-    }
-
-    close(fd);
-
-    return ret;
-}
-
-static int sysfs_write_int(char *path, int value)
-{
-    char buf[80];
-    snprintf(buf, 80, "%d", value);
-    return sysfs_write_str(path, buf);
-}
+static struct hw_module_methods_t power_module_methods = {
+    .open = NULL,
+};
 
 static bool check_governor(void)
 {
@@ -323,40 +296,28 @@ static void power_hint(__attribute__((unused)) struct power_module *module,
     }
 }
 
-static struct hw_module_methods_t power_module_methods = {
-    .open = NULL,
-};
-
-static int get_feature(__attribute__((unused)) struct power_module *module,
-                       feature_t feature)
+static int get_number_of_profiles()
 {
-    int ret = -1;
-    switch (feature) {
-    case POWER_FEATURE_SUPPORTED_PROFILES:
-	ret = PROFILE_MAX;
-	break;
-    default:
-        break;
-    }
-    return ret;
+    return PROFILE_MAX;
 }
 
-static void set_feature(__attribute__((unused)) struct power_module *module,
-                       feature_t feature, int mode)
+static void set_feature(struct power_module *module, feature_t feature, int mode)
 {
-    switch (feature) {
-    case POWER_FEATURE_SUPPORTED_PROFILES:
-        ALOGI("POWER_FEATURE_SUPPORTED_PROFILES: %d",mode);
-	break;
-    default:
-        break;
+    set_device_specific_feature(module, feature, mode);
+}
+
+static int get_feature(struct power_module *module __unused, feature_t feature)
+{
+    if (feature == POWER_FEATURE_SUPPORTED_PROFILES) {
+        return get_number_of_profiles();
     }
+    return -1;
 }
 
 struct power_module HAL_MODULE_INFO_SYM = {
     .common = {
         .tag = HARDWARE_MODULE_TAG,
-        .module_api_version = POWER_MODULE_API_VERSION_0_2,
+        .module_api_version = POWER_MODULE_API_VERSION_0_3,
         .hal_api_version = HARDWARE_HAL_API_VERSION,
         .id = POWER_HARDWARE_MODULE_ID,
         .name = "HI3650 Power HAL",
@@ -365,8 +326,8 @@ struct power_module HAL_MODULE_INFO_SYM = {
     },
 
     .init = power_init,
-    .setInteractive = power_set_interactive,
     .powerHint = power_hint,
+    .setInteractive = power_set_interactive,
     .setFeature = set_feature,
     .getFeature = get_feature
 };
