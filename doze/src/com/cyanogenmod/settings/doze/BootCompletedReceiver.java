@@ -23,7 +23,7 @@ import android.content.Intent;
 import android.util.Log;
 
 public class BootCompletedReceiver extends BroadcastReceiver {
-    static final String TAG = "KiwiDoze";
+    static final String TAG = "HisiDoze";
 
     @Override
     public void onReceive(final Context context, Intent intent) {

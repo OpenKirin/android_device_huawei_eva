@@ -104,6 +104,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     Gello
 
+# Doze
+PRODUCT_PACKAGES += \
+    HisiDoze
+
 # Ramdisk
 PRODUCT_PACKAGES += \
     fstab.hi3650 \
