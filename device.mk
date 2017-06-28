@@ -100,10 +100,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.fingerprint.xml:system/etc/permissions/android.hardware.fingerprint.xml
 
-# Gello
-PRODUCT_PACKAGES += \
-    Gello
-
 # Doze
 PRODUCT_PACKAGES += \
     HisiDoze
