@@ -33,9 +33,6 @@
 /data/camera(/.*)?					u:object_r:camera_data_file:s0
 /data/img(/.*)?						u:object_r:camera_data_file:s0
 
-# OEM
-/sbin/oeminfo_nvm_server 				u:object_r:oeminfo_nvm_exec:s0
-
 # NFC
 /data/nfc(/.*)?						u:object_r:nfc_data_file:s0
 /dev/nfc-nci                                    	u:object_r:nfc_device:s0
