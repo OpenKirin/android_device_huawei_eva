@@ -1341,7 +1341,7 @@ service thermal-daemon /vendor/bin/thermal-daemon
     user system
     group system
 
-service limit_current /system/vendor/bin/limit_current -l
+service limit_current /vendor/bin/limit_current -l
     user system
     group system
     disabled
@@ -1353,7 +1353,7 @@ service hwpged /system/bin/hwpged
     user root
     group readproc
 
-service chargemonitor /system/vendor/bin/chargemonitor
+service chargemonitor /vendor/bin/chargemonitor
     class late_start
     user root
     group system
