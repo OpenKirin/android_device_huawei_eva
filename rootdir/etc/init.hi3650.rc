@@ -169,12 +169,11 @@ on init
     chown system system /sys/kernel/perfhub/cpuaffinity
     chmod 0660 /sys/kernel/perfhub/cpuaffinity
 
-    chown system system /sys/devices/virtual/graphics/fb0/blank
-    chmod 0660 /sys/devices/virtual/graphics/fb0/blank
-    chown system system /sys/devices/virtual/graphics/fb0/vsync_event
-    chmod 0660 /sys/devices/virtual/graphics/fb0/vsync_event
-    chown system system /sys/devices/virtual/graphics/fb0/mode
-    chmod 0660 /sys/devices/virtual/graphics/fb0/mode
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq 1805000
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 480000
+
+    write /sys/devices/system/cpu/cpu4/cpufreq/scaling_max_freq 2304000
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 480000
 
     write /proc/sys/kernel/hung_task_panic 1
     write /proc/sys/kernel/hung_task_timeout_secs 120
@@ -199,7 +198,7 @@ on init
     chmod 0660 /sys/kernel/mntn/switch/worker
 
     mkdir /dev/cpuctl
-    chmod 0660 /dev/cpuctl
+    chmod 0666 /dev/cpuctl
     mount cgroup none /dev/cpuctl cpu
     chown system system /dev/cpuctl
     chown system system /dev/cpuctl/tasks
@@ -1033,18 +1032,6 @@ on boot
 
     chown system system /sys/class/misc/hw_bfm/bfm_ctl
     chmod 0660 /sys/class/misc/hw_bfm/bfm_ctl
-
-    write /sys/class/devfreq/ddrfreq/max_freq 1333000000
-    write /sys/class/devfreq/ddrfreq/min_freq 120000000
-    write /sys/class/devfreq/ddrfreq/polling_interval 50
-
-    write /sys/class/devfreq/ddrfreq_up_threshold/max_freq 1333000000
-    write /sys/class/devfreq/ddrfreq_up_threshold/min_freq 120000000
-    write /sys/class/devfreq/ddrfreq_up_threshold/polling_interval 50
-
-    write /sys/class/devfreq/gpufreq/max_freq 900000000
-    write /sys/class/devfreq/gpufreq/min_freq 120000000
-    write /sys/class/devfreq/gpufreq/polling_interval 50
 
     setprop ro.config.compatibility_enable 1
 
