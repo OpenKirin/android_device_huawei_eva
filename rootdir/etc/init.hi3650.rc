@@ -1099,7 +1099,6 @@ on charger
     import /init.charger.rc
 
 # Start Service
-
 service HwCamCfgSvr /vendor/bin/HwCamCfgSvr hi3650 EVA
     class main
     user media
