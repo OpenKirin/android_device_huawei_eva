@@ -29,6 +29,7 @@ import /init.hi3650.gps.rc
 import /init.hi3650.power.rc
 import /init.hi3650.usb.configfs.rc
 import /init.hi3650.usb.rc
+import /init.phone.rc
 
 on early-init
     mount debugfs /sys/kernel/debug /sys/kernel/debug mode=0775,gid=1000

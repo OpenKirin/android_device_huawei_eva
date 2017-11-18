@@ -118,6 +118,7 @@ PRODUCT_PACKAGES += \
     init.hi3650.rc \
     init.hi3650.usb.configfs.rc \
     init.hi3650.usb.rc \
+    init.phone.rc \
     ueventd.hi3650.rc
 
 # SNAP Camera
