@@ -93,5 +93,5 @@ on property:init.svc.recovery=running
     trigger enable-low-power
 
 on property:dev.bootcomplete=1
-    setprop sys.io.scheduler bfq
-    setprop setprop sys.usb.ffs_hdb.ready 0
+    write /sys/block/mmcblk0/queue/scheduler row
+    setprop sys.usb.ffs_hdb.ready 0
