@@ -170,11 +170,12 @@ on init
     chown system system /sys/kernel/perfhub/cpuaffinity
     chmod 0660 /sys/kernel/perfhub/cpuaffinity
 
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq 1805000
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 480000
-
-    write /sys/devices/system/cpu/cpu4/cpufreq/scaling_max_freq 2304000
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 480000
+    chown system system /sys/devices/virtual/graphics/fb0/blank
+    chmod 0660 /sys/devices/virtual/graphics/fb0/blank
+    chown system system /sys/devices/virtual/graphics/fb0/vsync_event
+    chmod 0660 /sys/devices/virtual/graphics/fb0/vsync_event
+    chown system system /sys/devices/virtual/graphics/fb0/mode
+    chmod 0660 /sys/devices/virtual/graphics/fb0/mode
 
     write /proc/sys/kernel/hung_task_panic 1
     write /proc/sys/kernel/hung_task_timeout_secs 120
@@ -214,6 +215,20 @@ on init
     write /dev/cpuctl/bg_non_interactive/cpu.shares 52
     write /dev/cpuctl/bg_non_interactive/cpu.rt_runtime_us 700000
     write /dev/cpuctl/bg_non_interactive/cpu.rt_period_us 1000000
+
+    mkdir /dev/cpuctl/limit_fg
+    chown system system /dev/cpuctl/limit_fg/tasks
+    chmod 644 /dev/cpuctl/limit_fg/tasks
+    write /dev/cpuctl/limit_fg/cpu.shares 1024
+    write /dev/cpuctl/limit_fg/cpu.rt_runtime_us 800000
+    write /dev/cpuctl/limit_fg/cpu.rt_period_us 1000000
+
+    mkdir /dev/cpuctl/bg_non_interactive/limit_bg
+    chown system system /dev/cpuctl/bg_non_interactive/limit_bg/tasks
+    chmod 644 /dev/cpuctl/bg_non_interactive/limit_bg/tasks
+    write /dev/cpuctl/bg_non_interactive/limit_bg/cpu.shares 1024
+    write /dev/cpuctl/bg_non_interactive/limit_bg/cpu.rt_runtime_us 700000
+    write /dev/cpuctl/bg_non_interactive/limit_bg/cpu.rt_period_us 1000000
 
     mkdir /dev/cpuset
     mount cgroup none /dev/cpuset cpuset,cpuset_noprefix
@@ -265,6 +280,13 @@ on init
     chmod 0664 /dev/cpuset/system-background/tasks
     chmod 0664 /dev/cpuset/top-app/tasks
     chmod 0664 /dev/cpuset/tasks
+
+    mkdir /dev/cpuset/vip
+    write /dev/cpuset/vip/cpus 4-7
+    write /dev/cpuset/vip/mems 0
+    chown system system /dev/cpuset/vip
+    chown system system /dev/cpuset/vip/tasks
+    chmod 0644 /dev/cpuset/vip/tasks
 
     chown radio system /dev/flp
     chmod 0660 /dev/flp
@@ -1170,7 +1192,7 @@ service modemlogcat_VIA /vendor/bin/modemlogcat_via -t /dev/ttySPI1 -p /data/log
     oneshot
 
 on property:sys.userdata_is_ready=1
-    exec - root root -- /system/bin/sh /vendor/etc/blkcg_init.sh 0 0
+    exec u:r:init:s0 root root -- /system/bin/sh /vendor/etc/blkcg_init.sh 0 0
 
 service perfhub /vendor/bin/perfhub
     class core
