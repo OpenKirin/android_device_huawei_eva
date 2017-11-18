@@ -13,17 +13,17 @@
 
 /dev/block/bootdevice/by-name/cust	     		/cust       	ext4	ro,barrier=1	                                     		wait
 
-/dev/block/bootdevice/by-name/userdata	   		/data	       	f2fs	nosuid,nodev,noatime,discard,inline_data,inline_xattr	  	wait,formattable
-/dev/block/bootdevice/by-name/cache      		/cache         	ext4	rw,nosuid,nodev,noatime,data=ordered                    	wait,check,formattable
+/dev/block/bootdevice/by-name/userdata	   		/data	       	f2fs	nosuid,nodev,noatime,inline_data,inline_xattr		  	wait
+/dev/block/bootdevice/by-name/cache      		/cache         	ext4	rw,nosuid,nodev,noatime,data=ordered                    	wait,check
 
 /dev/block/bootdevice/by-name/splash2         		/splash2        ext4    rw,nosuid,nodev,noatime,data=ordered				wait,check
 /dev/block/bootdevice/by-name/3rdmodem         		/3rdmodem       ext4    ro,nosuid,nodev,noatime,data=ordered				wait,check
 /dev/block/bootdevice/by-name/3rdmodemnvm		/3rdmodemnvm    ext4    rw,nosuid,nodev,noatime,data=ordered				wait,check
 /dev/block/bootdevice/by-name/3rdmodemnvmbkp		/3rdmodemnvmbkp ext4    rw,nosuid,nodev,noatime,data=ordered				wait,check
-/dev/block/bootdevice/by-name/secure_storage		/sec_storage    ext4    rw,nosuid,nodev,noatime,discard,nodelalloc,data=journal		wait,check
+/dev/block/bootdevice/by-name/secure_storage		/sec_storage    ext4    rw,nosuid,nodev,noatime,nodelalloc,data=journal			wait,check
 
-/dev/block/bootdevice/by-name/modemnvm_img		/mnvm2:0	ext4    rw,nosuid,nodev,noatime,discard,noauto_da_alloc,data=ordered	wait,check
-/dev/block/bootdevice/by-name/modem_om			/modem_log	ext4    rw,nosuid,nodev,noatime,discard,noauto_da_alloc,data=ordered	wait,check
+/dev/block/bootdevice/by-name/modemnvm_img		/mnvm2:0	ext4    rw,nosuid,nodev,noatime,noauto_da_alloc,data=ordered		wait,check
+/dev/block/bootdevice/by-name/modem_om			/modem_log	ext4    rw,nosuid,nodev,noatime,noauto_da_alloc,data=ordered		wait,check
 
 /dev/block/bootdevice/by-name/misc       		/misc          	emmc	defaults                                                 	defaults
 /dev/block/bootdevice/by-name/boot       		/boot          	emmc    defaults                                                 	defaults
